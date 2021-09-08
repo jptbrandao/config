@@ -72,6 +72,9 @@ let mapleader=","
 "Maps ,<space> to turn off highlight
 nnoremap <leader><space> :nohlsearch<CR>
 
+"Map ctrl n to nerd tree
+map <silent> <C-n> :NERDTreeFocus<CR>
+
 
 "--------------------------------
 "      Folding 
@@ -91,6 +94,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'hdima/python-syntax'
 Plug 'magicalbanana/sql-syntax-vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Javascript syntax
 Plug 'yuezk/vim-js'
