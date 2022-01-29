@@ -1,0 +1,18 @@
+[user]
+	name = jptbrandao@gmail.com
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[push]
+	default = simple
+[init]
+	defaultBranch = main
+[alias]
+  logall = !git log --oneline --graph --decorate --all
+  logpretty = !git log --pretty=format:'%C(blue)%h%C(red)%d %C(white)%s - %C(cyan)%cn, %C(green)%cr'

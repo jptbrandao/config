@@ -2,9 +2,26 @@ set nocompatible "not vi compatible
 filetype off
 
 "--------------------------------
+"      Ignoring
+"--------------------------------
+set path+=**
+
+" Nice menu when typing `:find *.py`
+set wildmode=longest,list,full
+set wildmenu
+" Ignore files
+set wildignore+=*.pyc
+set wildignore+=*_build/*
+set wildignore+=**/coverage/*
+set wildignore+=**/node_modules/*
+set wildignore+=**/android/*
+set wildignore+=**/ios/*
+set wildignore+=**/.git/*
+
+"--------------------------------
 "      Syntax and indent
 "--------------------------------
-"syntax on         "Turns on syntax highlighting
+syntax on         "Turns on syntax highlighting
 set showmatch     "Show matching braces when text indicator is over them
 
 augroup CursorLineOnlyInActiveWindow
@@ -21,6 +38,7 @@ set autoindent
 "      Basic Editing Config
 "--------------------------------
 
+set noerrorbells
 set nu "Set number of lines
 set rnu "Set relative line numbering
 set incsearch "Set incremental search (as string is being typed)
@@ -49,6 +67,7 @@ set backupdir=~/tmp// "Saves backup files to tmp
 set directory=~/tmp// "Saves swap files to tmp
 set undodir=~/tmp//   "Saves undo files to tmp
 
+set colorcolumn=100
 
 "--------------------------------
 "     Remapping Keys 
@@ -72,8 +91,18 @@ let mapleader=","
 "Maps ,<space> to turn off highlight
 nnoremap <leader><space> :nohlsearch<CR>
 
-"Map ctrl n to nerd tree
+"Map ctrl n to go straight nerd tree
 map <silent> <C-n> :NERDTreeFocus<CR>
+"Map window movements
+nnoremap <C-h> :wincmd h<CR>
+nnoremap <C-j> :wincmd j<CR>
+nnoremap <C-k> :wincmd k<CR>
+nnoremap <C-l> :wincmd l<CR>
+"Map UndoTree
+nnoremap <leader>u :UndotreeShow<CR>
+"Map Ripgrep
+nnoremap <leader>ps :Rg<space>
+
 
 
 "--------------------------------
@@ -91,22 +120,23 @@ set foldmethod=indent   " fold based on indent level
 call plug#begin('~/.config/nvim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-fugitive'
+"Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
 Plug 'hdima/python-syntax'
 Plug 'magicalbanana/sql-syntax-vim'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mbbill/undotree'
+"Plug 'jremmen/vim-ripgrep'
 
 " Javascript syntax
 Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
 
 " React-Typescript syntax
-" Reference: https://github.com/peitalin/vim-jsx-typescript
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 
 " js prettier ESLint
-" Reference: https://github.com/dense-analysis/ale
 Plug 'w0rp/ale'
 call plug#end()
 
@@ -116,9 +146,23 @@ set spell
 set splitright
 
 " COLORS
-"
-let g:gruvbox_invert_selection=0
 colorscheme gruvbox
+set background=dark
+let g:gruvbox_invert_selection=0
+
+
+"
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
+"
+"autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+"autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+"
+"autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+"    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+"
+"autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
+"
 
 " PLUGIN NERDTREE
 autocmd vimenter * NERDTree
@@ -142,3 +186,12 @@ let g:ale_fixers = {
 \  'javascript': ['eslint'],
 \}
 let g:ale_fix_on_save = 1
+
+" PLUGIN CTRLP
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:ctrlp_use_caching = 0
+
+" PLUGIN RipGrep
+"if executable('rg')
+"  let g:rg_derive_root='true'
+"endif
