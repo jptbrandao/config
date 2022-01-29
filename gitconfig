@@ -14,6 +14,8 @@
 [init]
 	defaultBranch = main
 [alias]
+  s = !git status -s
+  c = !git add --all && git commit -m
   logall = !git log --oneline --graph --decorate --all
   logpretty = !git log --pretty=format:'%C(blue)%h%C(red)%d %C(white)%s - %C(cyan)%cn, %C(green)%cr'
   lpa = !git logpretty --graph --all
