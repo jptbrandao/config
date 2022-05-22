@@ -124,7 +124,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'hdima/python-syntax'
 Plug 'magicalbanana/sql-syntax-vim'
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mbbill/undotree'
 
 " Javascript syntax
