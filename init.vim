@@ -1,8 +1,7 @@
-set nocompatible "not vi compatible
-filetype off
+set nocompatible "not vi compatible filetype off
 
 "--------------------------------
-"      Ignoring
+"     Ignoring
 "--------------------------------
 set path+=**
 
@@ -19,37 +18,33 @@ set wildignore+=**/ios/*
 set wildignore+=**/.git/*
 
 "--------------------------------
-"      Syntax and indent
+"     Syntax and indent
 "--------------------------------
 syntax on         "Turns on syntax highlighting
-set showmatch     "Show matching braces when text indicator is over them
-
-augroup CursorLineOnlyInActiveWindow
-    autocmd!
-    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    autocmd WinLeave * setlocal nocursorline
-augroup END
-
+set showmatch     "Showmatching braces when text indicator is over them
 filetype plugin indent on "enable file type detection
 set autoindent
 
 
 "--------------------------------
-"      Basic Editing Config
+"   Basic Editing Config
 "--------------------------------
 
 set noerrorbells
 set nu "Set number of lines
 set rnu "Set relative line numbering
 set incsearch "Set incremental search (as string is being typed)
+set scrolloff=6
+set signcolumn=yes
 set hls "Highlight search
-set lbr "Set linebreak
+set lbr "Setlinebreak
 set backspace=indent,eol,start "allows backspacing over everything
 set listchars=tab:>>,nbsp:~ "set list to see tabs and non breakable spaces
 set wildmenu "Provides graphical menu for matches in autocomplete , try ':e <filename>'
 set lazyredraw "Draws only when necessary
 set ruler "Shows cursor position at all times
 set showcmd "Displays incomplete commands
+set completeopt=menuone,noinsert,noselect
 
 " Use two spaces instead of tab during formatting
 set expandtab
@@ -64,18 +59,18 @@ set ignorecase
 set splitright "New splits on the right
 
 set backupdir=~/tmp// "Saves backup files to tmp
-set directory=~/tmp// "Saves swap files to tmp
+set directory=~/tmp// "Savesswap files to tmp
 set undodir=~/tmp//   "Saves undo files to tmp
 
 set colorcolumn=100
 
 "--------------------------------
-"     Remapping Keys 
+"        Remapping Keys
 "--------------------------------
 "'Q' in normal mode enters Ex mode. Don't want this.
-nmap Q <Nop> 
+nmap Q <Nop>
 "space opens and closes folding
-nnoremap <space> za  
+nnoremap <space> za
 
 "Maps B and E to beginning and end of lines repectively
 nnoremap B ^
@@ -102,67 +97,76 @@ nnoremap <C-l> :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 "Map Ripgrep
 nnoremap <leader>ps :Rg<space>
+"Highlight word without moving
+nnoremap * *N
 
 
 
 "--------------------------------
-"      Folding 
+"    Folding
 "--------------------------------
-set foldenable "enable folding
+set foldenable          "enable folding
 set foldlevelstart=10   " open most folds by default
 set foldnestmax=10      " 10 nested fold max
-set foldmethod=indent   " fold based on indent level
-" This is especially useful for me since I spend my days in Python.
-" Other acceptable values are marker, manual, expr, syntax, diff.
-" Run :help foldmethod to find out what each of those do.
+set foldmethod=indent   "fold based on indent level
+" This is especially useful for me since I spend my days in Python. Other
+" acceptable values are marker, manual, expr, syntax, diff. Run :help
+" foldmethod to find out what each of those do.
 
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'morhetz/gruvbox'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'williamboman/nvim-lsp-installer'
+Plug 'gruvbox-community/gruvbox'
 Plug 'tpope/vim-fugitive'
-"Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
 Plug 'hdima/python-syntax'
 Plug 'magicalbanana/sql-syntax-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mbbill/undotree'
-"Plug 'jremmen/vim-ripgrep'
 
 " Javascript syntax
-Plug 'yuezk/vim-js'
+Plug 'yuezk/vim-js' 
 Plug 'maxmellon/vim-jsx-pretty'
 
 " React-Typescript syntax
-Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 
 " js prettier ESLint
-Plug 'w0rp/ale'
+Plug 'w0rp/ale' 
 call plug#end()
 
 " Dictionary
-set spelllang=en_us,pt
+set spelllang=en_us
 set spell
 set splitright
 
+" telescope
+nnoremap <leader>ps :lua require('telescope.builtin').grep_string({search = vim.fn.input("Grep for > ")})<CR>
+
 " COLORS
 colorscheme gruvbox
+highlight Normal guibg=none
+let g:gruvbox_contrast_dark='hard'
 set background=dark
 let g:gruvbox_invert_selection=0
 
+" lsp
+"let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy'] lua
+"require'lspconfig'.tsserver
 
-"
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
-"
-"autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-"autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-"
-"autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-"    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
-"
-"autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
-"
+let g:ale_linters = { 
+  \'javascript': ['eslint'], 
+  \'typescript': ['eslint','tsserver']
+  \}
+
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
 
 " PLUGIN NERDTREE
 autocmd vimenter * NERDTree
@@ -182,16 +186,13 @@ let g:ale_sign_warning = '⚠'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
-let g:ale_fixers = {
-\  'javascript': ['eslint'],
+let g:ale_fixers = { 
+  \'javascript': ['eslint'], 
 \}
 let g:ale_fix_on_save = 1
 
 " PLUGIN CTRLP
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-let g:ctrlp_use_caching = 0
-
-" PLUGIN RipGrep
-"if executable('rg')
-"  let g:rg_derive_root='true'
-"endif
+"let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc
+"--exclude-standard']
+"let g:ctrlp_use_caching = 0
+nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
