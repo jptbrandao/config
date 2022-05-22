@@ -44,7 +44,6 @@ set wildmenu "Provides graphical menu for matches in autocomplete , try ':e <fil
 set lazyredraw "Draws only when necessary
 set ruler "Shows cursor position at all times
 set showcmd "Displays incomplete commands
-set completeopt=menuone,noinsert,noselect
 
 " Use two spaces instead of tab during formatting
 set expandtab
@@ -118,13 +117,11 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'nvim-lua/plenary.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'williamboman/nvim-lsp-installer'
 Plug 'gruvbox-community/gruvbox'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'hdima/python-syntax'
 Plug 'magicalbanana/sql-syntax-vim'
-"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mbbill/undotree'
 
 " Javascript syntax
@@ -153,9 +150,6 @@ let g:gruvbox_contrast_dark='hard'
 set background=dark
 let g:gruvbox_invert_selection=0
 
-" lsp
-"let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy'] lua
-"require'lspconfig'.tsserver
 
 let g:ale_linters = { 
   \'javascript': ['eslint'], 
