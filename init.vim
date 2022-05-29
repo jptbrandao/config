@@ -152,6 +152,8 @@ nnoremap <leader>ps :lua require('telescope.builtin').grep_string({search = vim.
 
 " Autocomplete
 let g:deoplete#enable_at_startup = 1
+set completeopt=menu,menuone,noselect
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 " COLORS
 highlight Normal guibg=none
