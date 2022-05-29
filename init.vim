@@ -150,6 +150,9 @@ set splitright
 " telescope
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({search = vim.fn.input("Grep for > ")})<CR>
 
+" Autocomplete
+let g:deoplete#enable_at_startup = 1
+
 " COLORS
 highlight Normal guibg=none
 let g:gruvbox_contrast_dark='hard'
