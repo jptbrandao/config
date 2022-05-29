@@ -124,7 +124,7 @@ Plug 'mbbill/undotree'
 Plug 'rust-lang/rust.vim'
 
 " Tyescript
-Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
 " telescope
 "Plug 'nvim-lua/popup.nvim'
@@ -197,7 +197,7 @@ let g:ale_fixers = {
   \'rust': ['rustfmt']
 \}
 let g:ale_fix_on_save = 1
-let g:ale_completion_tsserver_autoimport = 1
+let g:ale_completion_autoimport = 1
 
 " PLUGIN CTRLP
 "let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc
