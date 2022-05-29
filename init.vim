@@ -94,8 +94,6 @@ nnoremap <C-k> :wincmd k<CR>
 nnoremap <C-l> :wincmd l<CR>
 "Map UndoTree
 nnoremap <leader>u :UndotreeShow<CR>
-"Map Ripgrep
-nnoremap <leader>ps :Rg<space>
 "Highlight word without moving
 nnoremap * *N
 
@@ -114,9 +112,7 @@ set foldmethod=indent   "fold based on indent level
 
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'nvim-lua/plenary.nvim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-telescope/telescope.nvim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
@@ -124,12 +120,23 @@ Plug 'hdima/python-syntax'
 Plug 'magicalbanana/sql-syntax-vim'
 Plug 'mbbill/undotree'
 
+" Rust
+Plug 'rust-lang/rust.vim'
+
+" Tyescript
+Plug 'leafgarland/typescript-vim'
+
+" telescope
+"Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
 " Javascript syntax
 Plug 'yuezk/vim-js' 
 Plug 'maxmellon/vim-jsx-pretty'
 
-" React-Typescript syntax
-Plug 'peitalin/vim-jsx-typescript'
+" Auto Complete
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " js prettier ESLint
 Plug 'w0rp/ale' 
@@ -144,17 +151,12 @@ set splitright
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({search = vim.fn.input("Grep for > ")})<CR>
 
 " COLORS
-colorscheme gruvbox
 highlight Normal guibg=none
 let g:gruvbox_contrast_dark='hard'
-set background=dark
 let g:gruvbox_invert_selection=0
+set background=dark
+colorscheme gruvbox
 
-
-let g:ale_linters = { 
-  \'javascript': ['eslint'], 
-  \'typescript': ['eslint','tsserver']
-  \}
 
 augroup CursorLineOnlyInActiveWindow
   autocmd!
@@ -175,6 +177,12 @@ let g:NERDTreeWinPos = "right"
 
 
 " PLUGIN ES Linter (ALE)
+let g:ale_linters = { 
+  \'javascript': ['eslint'], 
+  \'typescript': ['eslint','tsserver'],
+  \'rust' : ['rls']
+\}
+
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
@@ -182,8 +190,11 @@ highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
 let g:ale_fixers = { 
   \'javascript': ['eslint'], 
+  \'typescript': ['eslint'],
+  \'rust': ['rustfmt']
 \}
 let g:ale_fix_on_save = 1
+let g:ale_completion_tsserver_autoimport = 1
 
 " PLUGIN CTRLP
 "let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc
