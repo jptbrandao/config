@@ -205,4 +205,4 @@ let g:ale_completion_autoimport = 1
 "let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc
 "--exclude-standard']
 "let g:ctrlp_use_caching = 0
-nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
+nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
