@@ -136,7 +136,7 @@ Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
 
 " Auto Complete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " js prettier ESLint
 Plug 'w0rp/ale' 
@@ -151,9 +151,9 @@ set splitright
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({search = vim.fn.input("Grep for > ")})<CR>
 
 " Autocomplete
-let g:deoplete#enable_at_startup = 1
-set completeopt=menu,menuone,noselect
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+"let g:deoplete#enable_at_startup = 1
+"set completeopt=menu,menuone,noselect
+"let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 " COLORS
 highlight Normal guibg=none
