@@ -96,6 +96,8 @@ nnoremap <C-l> :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 "Highlight word without moving
 nnoremap * *N
+"Toggle Blamer
+nnoremap <leader>gb :BlamerToggle<CR>
 
 
 
