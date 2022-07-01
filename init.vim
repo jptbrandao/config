@@ -140,6 +140,9 @@ Plug 'maxmellon/vim-jsx-pretty'
 
 " js prettier ESLint
 Plug 'w0rp/ale' 
+
+" Git blame, shows author next to line
+Plug 'APZelos/blamer.nvim'
 call plug#end()
 
 " Dictionary
@@ -200,6 +203,10 @@ let g:ale_fixers = {
 \}
 let g:ale_fix_on_save = 1
 let g:ale_completion_autoimport = 1
+
+" Git blame Plugin
+let g:blamer_enabled = 1
+let g:blamer_prefix = ' > '
 
 " PLUGIN CTRLP
 "let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc
