@@ -206,7 +206,8 @@ let g:ale_completion_autoimport = 1
 
 " Git blame Plugin
 let g:blamer_enabled = 1
-let g:blamer_prefix = ' > '
+let g:blamer_prefix = '   //   '
+let g:blamer_template ='<committer>: <committer-time> => <summary>' 
 
 " PLUGIN CTRLP
 "let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc
