@@ -199,7 +199,7 @@ set shortmess+=c
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gt <Plug>(coc-type-definition)
+"nmap <silent> gt <Plug>(coc-type-definition)     # maps to change tab
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> <C-f> <Plug>(coc-refactor)
 
@@ -235,6 +235,8 @@ nnoremap <leader>xx <cmd>CocDiagnostics<cr>
 " Use `lj` and `lk` for navigate diagnostics
 nmap <silent> <leader>lj <Plug>(coc-diagnostic-prev)
 nmap <silent> <leader>lk <Plug>(coc-diagnostic-next)
+
+"
 "END COC"
 
 " Git blame Plugin
