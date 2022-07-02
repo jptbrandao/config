@@ -143,12 +143,6 @@ Plug 'maxmellon/vim-jsx-pretty'
 " Use release branch (recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Auto Complete
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-" js prettier ESLint
-"Plug 'w0rp/ale'
-
 " Git blame, shows author next to line
 Plug 'APZelos/blamer.nvim'
 call plug#end()
