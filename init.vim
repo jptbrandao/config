@@ -4,6 +4,7 @@ set nocompatible "not vi compatible filetype off
 "     Ignoring
 "--------------------------------
 set path+=**
+set hidden
 
 " Nice menu when typing `:find *.py`
 set wildmode=longest,list,full
@@ -57,7 +58,9 @@ set ignorecase
 
 set splitright "New splits on the right
 
-set backupdir=~/tmp// "Saves backup files to tmp
+set nobackup
+set nowritebackup
+"set backupdir=~/tmp// "Saves backup files to tmp
 set directory=~/tmp// "Savesswap files to tmp
 set undodir=~/tmp//   "Saves undo files to tmp
 
@@ -97,7 +100,7 @@ nnoremap <leader>u :UndotreeShow<CR>
 "Highlight word without moving
 nnoremap * *N
 "Toggle Blamer
-nnoremap <leader>gb :BlamerToggle<CR>
+cmap blame BlamerToggle
 
 
 
@@ -134,14 +137,17 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 " Javascript syntax
-Plug 'yuezk/vim-js' 
+Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
+
+" Use release branch (recommend)
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Auto Complete
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " js prettier ESLint
-Plug 'w0rp/ale' 
+"Plug 'w0rp/ale'
 
 " Git blame, shows author next to line
 Plug 'APZelos/blamer.nvim'
@@ -154,11 +160,6 @@ set splitright
 
 " telescope
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({search = vim.fn.input("Grep for > ")})<CR>
-
-" Autocomplete
-"let g:deoplete#enable_at_startup = 1
-"set completeopt=menu,menuone,noselect
-"let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 " COLORS
 highlight Normal guibg=none
@@ -185,30 +186,60 @@ autocmd BufWinEnter * NERDTreeMirror
 autocmd VimEnter * wincmd p
 let g:NERDTreeWinPos = "right"
 
+" COC  AutoCompletion Settings
+let g:coc_global_extensions = [
+\ 'coc-eslint', 'coc-prettier',
+\ 'coc-tsserver', 'coc-tslint-plugin',
+\ 'coc-json', 'coc-rls', 'coc-yaml', 'coc-rust-analyzer'
+\ ]
 
-" PLUGIN ES Linter (ALE)
-let g:ale_linters = { 
-  \'javascript': ['eslint'], 
-  \'typescript': ['eslint','tsserver'],
-  \'rust' : ['rls']
-\}
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
 
-let g:ale_sign_error = '✘'
-let g:ale_sign_warning = '⚠'
-highlight ALEErrorSign ctermbg=NONE ctermfg=red
-highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gt <Plug>(coc-type-definition)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <C-f> <Plug>(coc-refactor)
 
-let g:ale_fixers = { 
-  \'javascript': ['eslint'], 
-  \'typescript': ['eslint'],
-  \'rust': ['rustfmt']
-\}
-let g:ale_fix_on_save = 1
-let g:ale_completion_autoimport = 1
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Function to trim whitespace
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+
+" Automatically call a few functions when saving files
+augroup formatCode
+    autocmd!
+    autocmd BufWritePre * :call TrimWhitespace()
+    " automatically format files on save
+    autocmd BufWrite * :call CocAction('format')
+augroup END
+
+" open the diagnostic window
+nnoremap <leader>xx <cmd>CocDiagnostics<cr>
+
+" Use `lj` and `lk` for navigate diagnostics
+nmap <silent> <leader>lj <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>lk <Plug>(coc-diagnostic-next)
+"END COC"
 
 " Git blame Plugin
 let g:blamer_prefix = '   //   '
-let g:blamer_template ='<committer>: <committer-time> => <summary>' 
+let g:blamer_template ='<committer>: <committer-time> => <summary>'
 
 " PLUGIN CTRLP
 "let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc
