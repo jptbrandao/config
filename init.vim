@@ -236,6 +236,7 @@ nmap <silent> <leader>lk <Plug>(coc-diagnostic-next)
 " Git blame Plugin
 let g:blamer_prefix = '   //   '
 let g:blamer_template ='<committer>: <committer-time> => <summary>'
+let g:blamer_delay = 500
 
 " PLUGIN CTRLP
 "let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc
