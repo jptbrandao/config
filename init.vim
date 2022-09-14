@@ -176,7 +176,6 @@ augroup END
 "Map ctrl n to go straight nerd tree
 map <silent> <C-n> :NERDTreeFocus<CR>
 autocmd vimenter * NERDTree
-
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd StdinReadPre * let s:std_in=1
@@ -185,6 +184,8 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 autocmd BufWinEnter * NERDTreeMirror
 autocmd VimEnter * wincmd p
 let g:NERDTreeWinPos = "right"
+let g:NERDTreeShowHidden = 1
+
 
 
 "----------------------------------------------
