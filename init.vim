@@ -88,8 +88,6 @@ let mapleader=","
 "Maps ,<space> to turn off highlight
 nnoremap <leader><space> :nohlsearch<CR>
 
-"Map ctrl n to go straight nerd tree
-map <silent> <C-n> :NERDTreeFocus<CR>
 "Map window movements
 nnoremap <C-h> :wincmd h<CR>
 nnoremap <C-j> :wincmd j<CR>
@@ -172,8 +170,13 @@ augroup CursorLineOnlyInActiveWindow
   autocmd WinLeave * setlocal nocursorline
 augroup END
 
-" PLUGIN NERDTREE
+"----------------------------------------------
+" Plugin: 'scrooloose/nerdtree'
+"----------------------------------------------
+"Map ctrl n to go straight nerd tree
+map <silent> <C-n> :NERDTreeFocus<CR>
 autocmd vimenter * NERDTree
+
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd StdinReadPre * let s:std_in=1
@@ -183,6 +186,10 @@ autocmd BufWinEnter * NERDTreeMirror
 autocmd VimEnter * wincmd p
 let g:NERDTreeWinPos = "right"
 
+
+"----------------------------------------------
+" Plugin: 'neoclide/coc.nvim'
+"----------------------------------------------
 " COC  AutoCompletion Settings
 let g:coc_global_extensions = [
 \ 'coc-eslint', 'coc-prettier',
@@ -190,6 +197,28 @@ let g:coc_global_extensions = [
 \ 'coc-json', 'coc-rls', 'coc-yaml', 'coc-rust-analyzer',
 \ 'coc-go'
 \ ]
+
+
+"----------------------------------------------
+" Language: Go
+"----------------------------------------------
+" Enable syntax highlighting per default
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+" Show type information
+let g:go_auto_type_info = 1
+" Highlight variable uses
+let g:go_auto_sameids = 0
+" Using gopls to find definitions and information.
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
 
 set cmdheight=2
 set updatetime=300
