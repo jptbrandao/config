@@ -32,7 +32,7 @@
   },
   "golang": {
     "command": "gopls",
-    "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+    "rootPatterns": ["go.work", "go.mod", ".vim/", ".git/", ".hg/"],
     "filetypes": ["go"]
   }
 }
