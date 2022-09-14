@@ -140,6 +140,9 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
 
+" Golang syntax
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 " Use release branch (recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
