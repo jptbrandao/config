@@ -184,7 +184,7 @@ let g:NERDTreeWinPos = "right"
 let g:coc_global_extensions = [
 \ 'coc-eslint', 'coc-prettier',
 \ 'coc-tsserver', 'coc-tslint-plugin',
-\ 'coc-json', 'coc-rls', 'coc-yaml', 'coc-rust-analyzer'
+\ 'coc-json', 'coc-rls', 'coc-yaml', 'coc-rust-analyzer',
 \ 'coc-go'
 \ ]
 
