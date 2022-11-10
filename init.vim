@@ -45,6 +45,7 @@ set wildmenu "Provides graphical menu for matches in autocomplete , try ':e <fil
 set lazyredraw "Draws only when necessary
 set ruler "Shows cursor position at all times
 set showcmd "Displays incomplete commands
+set nowrap "Do not wrap lines
 
 " Use two spaces instead of tab during formatting
 set expandtab
