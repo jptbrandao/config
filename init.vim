@@ -83,6 +83,10 @@ nnoremap E $
 nnoremap J <C-e>
 nnoremap K <C-y>
 
+"Centers view when jumping
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
 "Maps leader to ,
 let mapleader=","
 
