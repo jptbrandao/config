@@ -28,5 +28,6 @@ vim.opt.splitright = true
 vim.opt.colorcolumn = "100"
 
 vim.opt.foldenable = true
+vim.opt.mouse = ""
 
 vim.g.leader = " "
