@@ -25,9 +25,16 @@ vim.opt.updatetime = 50
 vim.opt.smartcase = true
 vim.opt.ignorecase = true
 vim.opt.splitright = true
+vim.opt.splitbelow = true
 vim.opt.colorcolumn = "100"
 
+vim.opt.fillchars = { fold = " " }
 vim.opt.foldenable = true
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevel = 99
+vim.g.markdown_folding = 1 -- enable markdown folding
+
 vim.opt.mouse = ""
+vim.opt.termguicolors = true
 
 vim.g.leader = " "
