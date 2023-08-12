@@ -34,7 +34,7 @@ vim.opt.foldmethod = "indent"
 vim.opt.foldlevel = 99
 vim.g.markdown_folding = 1 -- enable markdown folding
 
-vim.opt.mouse = ""
+vim.opt.mouse = "nvi"
 vim.opt.termguicolors = true
 
 vim.g.leader = " "
