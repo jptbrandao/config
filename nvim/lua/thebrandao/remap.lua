@@ -30,3 +30,5 @@ vim.keymap.set('n', '*', '*N')
 vim.keymap.set('n', ',<leader>', ':nohlsearch<CR>')
 
 vim.keymap.set('n', 'zc', 'za')
+
+vim.keymap.set('n', '<leader>es', ':EslintFixAll<CR>')
