@@ -1,3 +1,4 @@
+-- zero lsp
 local lsp = require('lsp-zero')
 
 lsp.preset('recommended')
@@ -38,8 +39,18 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set('n', ']d', function() vim.diagnostic.goto_prev() end, opts)
     vim.keymap.set('n', '<leader>rs', '<cmd>LspRestart<CR>', opts)
 end)
-
 lsp.setup()
 
 
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+-- normal lsp
+local lspconfig = require('lspconfig')
+lspconfig.eslint.setup {
+    on_attach = function(client, bufnr)
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            command = "EslintFixAll",
+        })
+    end,
+}
+
+-- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
