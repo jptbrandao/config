@@ -126,9 +126,12 @@ export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 # Use sublime
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl ."
 
+# Tools
+alias cat='bat'
+
 # Work
-alias loga-eks-ob-cert='echo input thingy'
-alias loga-eks-ob-prod='echo input thingy'
+alias loga-eks-ob-cert='kubectx arn:aws:eks:us-east-1:012737790358:cluster/eks-ob-cert'
+alias loga-eks-ob-prod='kubectx arn:aws:eks:us-east-1:470703231473:cluster/eks-ob-prod'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
