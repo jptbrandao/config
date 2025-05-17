@@ -1,7 +1,2 @@
-require('thebrandao')
-
---[
---vim.cmd([[
---source ~/.config/nvim/uiconfig.vim
---]])
---]
+require("brandao.core")
+require("brandao.lazy")
