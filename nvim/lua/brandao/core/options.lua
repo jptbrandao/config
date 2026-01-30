@@ -8,7 +8,7 @@ opt.tabstop = 4
 opt.softtabstop = 4
 opt.shiftwidth = 4
 opt.expandtab = true
-opt.autoindent = true 
+opt.autoindent = true
 
 opt.wrap = false
 
@@ -34,7 +34,6 @@ opt.backup = false
 -- disable swap files
 opt.swapfile = false
 
-
 opt.scrolloff = 6
 
 opt.colorcolumn = "100"
@@ -44,5 +43,5 @@ opt.mouse = "nvi"
 
 -- #grib to decide
 -- opt.fillchars = { fold = " " }
--- opt.foldmethod = "syntax"
--- opt.foldlevel = 99
+opt.foldmethod = "indent"
+opt.foldlevel = 10
